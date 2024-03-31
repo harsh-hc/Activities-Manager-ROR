@@ -1,0 +1,34 @@
+<%= render 'navbar'%>
+<div class="container mt-5">
+  <div class="row">
+  <div class="col-md-6 offset-md-3">
+  <div class="card">
+    <div class="card-header text-center">
+      <h2> <%=@task.title%> <h2> 
+        <hr>
+      <%if @task.completed %>
+        <h4 class="text-success">Completed <h4>
+      <% else %>
+        <h4 class="text-danger"> Pending </h4> 
+      <% end %>
+    </div>
+    <br>
+    <div class="card-body text-center" >
+      <h5> <%= @task.description%> <h5>
+
+    </div>  
+
+    <div class="d-flex card-footer gap-2 justify-content-center"">
+      <%= link_to "Edit this task", edit_task_path(@task), class: "link-info" %> |
+      <%= link_to "Back to tasks", tasks_path, class: "link-info" %>
+
+    </div>
+  </div>
+
+  <br>
+  <div class="d-flex justify-content-center">
+    <%= button_to "Destroy this task", @task, method: :delete, class: "btn btn-danger" %>
+  </div>
+  </div>
+  </div>
+</div>

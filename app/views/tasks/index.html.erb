@@ -1,0 +1,40 @@
+<%# <p style="color: green"><%= notice %>
+<%= render 'navbar' %>
+<br>
+
+<div class="d-flex justify-content-center">
+  <div class="text-center p-4 mb-2 bg-light text-dark">
+    <h1>Tasks</h1> 
+    <p> Your have <%=@tasks.size%> tasks </p>
+  </div>
+</div>
+<br>
+<div class="row justify-content-center">
+<table class="table table-striped table-hover table-bordered w-75">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th colspan="4" class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td class="text-uppercase fst-italic text-center"><%= task.title %></td>
+        <td class="fst-italic text-center"><%= task.description %></td>
+        <td><%= task.completed ? 'Completed' : 'Pending' %></td>
+        <td>mark as completed</td>
+        <td><%= link_to 'Show', task, class: 'btn btn-sm btn-primary' %></td>
+        <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-sm btn-secondary' %></td>
+        <td><%= link_to 'Destroy', task_path(task), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+

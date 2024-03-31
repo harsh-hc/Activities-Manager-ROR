@@ -1,0 +1,15 @@
+<%= render 'navbar'%>
+
+<div class="d-flex justify-content-center">
+  <h1>Editing task</h1>
+  <hr>
+  <br>
+</div>
+<%= render "form", task: @task %>
+
+<br>
+
+<div class="d-flex justify-content-center">
+  <%= link_to "Show this task", @task %> |
+  <%= link_to "Back to tasks", tasks_path %>
+</div>
