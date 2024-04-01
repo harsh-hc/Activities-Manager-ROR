@@ -26,7 +26,8 @@
   </div>
 
   <br>
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-evenly">
+    <%= link_to 'Completed', complete_task_path(@task), data: {turbo_method: :put} ,class: 'btn btn-success ' %> 
     <%= button_to "Destroy this task", @task, method: :delete, class: "btn btn-danger" %>
   </div>
   </div>

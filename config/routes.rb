@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   
   devise_for :users
+
+  match 'tasks/complete/:id' => 'tasks#complete', as: 'complete_task', via: :put
+
   resources :tasks
+
 
   root "tasks#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

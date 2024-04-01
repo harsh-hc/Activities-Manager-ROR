@@ -11,7 +11,16 @@ class TasksController < ApplicationController
   # GET /tasks/1 or /tasks/1.json
   def show
     @task = Task.find(params[:id])
-  end
+  end 
+
+  def complete
+    @task = current_user.tasks.find(params[:id])
+    @task.completed = true
+    @task.save
+    redirect_to tasks_path
+    # render index
+   end
+   
 
   # GET /tasks/new
   def new
@@ -22,17 +31,14 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    if @task.save
+      redirect_to @task, notice: "Task was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
-    # GET /tasks/1/edit
+
+  # GET /tasks/1/edit
   def edit
     @task = Task.find(params[:id])
   end
@@ -40,15 +46,6 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
-    # respond_to do |format|
-    #   if @task.update(task_params)
-    #     format.html { redirect_to task_url(@task), notice: "Task was successfully updated." }
-    #     format.json { render :show, status: :ok, location: @task }
-    #   else
-    #     format.html { render :edit, status: :unprocessable_entity }
-    #     format.json { render json: @task.errors, status: :unprocessable_entity }
-    #   end
-    # end
     @task = Task.find(params[:id])
 
     if @task.update(task_params)

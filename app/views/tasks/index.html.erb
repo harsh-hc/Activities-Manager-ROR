@@ -21,15 +21,16 @@
   </thead>
   <tbody>
     <% @tasks.each do |task| %>
+    <%# <% if !task.completed?%> 
       <tr>
         <td class="text-uppercase fst-italic text-center"><%= task.title %></td>
         <td class="fst-italic text-center"><%= task.description %></td>
         <td><%= task.completed ? 'Completed' : 'Pending' %></td>
-        <td>mark as completed</td>
+        <td><%= link_to 'Completed', complete_task_path(task), data: {turbo_method: :put} ,class: 'btn btn-sm btn-success' %></td>
         <td><%= link_to 'Show', task, class: 'btn btn-sm btn-primary' %></td>
         <td><%= link_to 'Edit', edit_task_path(task), class: 'btn btn-sm btn-secondary' %></td>
         <td><%= link_to 'Destroy', task_path(task), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger' %></td>
-        
+
       </tr>
     <% end %>
   </tbody>
